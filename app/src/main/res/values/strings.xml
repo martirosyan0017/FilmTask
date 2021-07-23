@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Telcell Task</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Success">Success</string>
+    <string name="Failed">Failed</string>
+    <string name="Running">Running</string>
+    <string name="telcell_action_bar_title">Telcell</string>
+    <string name="movies_action_bar">Movies</string>
+    <string name="movie_info">Movie Info</string>
+</resources>
