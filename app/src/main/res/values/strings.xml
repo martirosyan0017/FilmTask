@@ -8,4 +8,10 @@
     <string name="telcell_action_bar_title">Telcell</string>
     <string name="movies_action_bar">Movies</string>
     <string name="movie_info">Movie Info</string>
+    <string name="overview">Overview:</string>
+    <string name="rating">Rating: </string>
+    <string name="releasedate">ReleaseDate: </string>
+    <string name="connection_problem">Connection Problem!!</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="no_internet_connection_connect_to_the_internet_and_try_again">No internet connection. Connect to the internet and try again.</string>
 </resources>

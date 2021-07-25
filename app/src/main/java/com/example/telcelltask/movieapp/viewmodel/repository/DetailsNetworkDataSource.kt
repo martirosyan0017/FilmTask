@@ -10,7 +10,10 @@ import com.example.telcelltask.movieapp.webservice.NetworkState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class DetailsNetworkDataSource(private val apiService: ApiService, private val compositeDisposable: CompositeDisposable) {
+class DetailsNetworkDataSource(
+    private val apiService: ApiService,
+    private val compositeDisposable: CompositeDisposable
+) {
 
     private val networkStateMutableLiveData = MutableLiveData<NetworkState>()
     val networkStateLiveData: LiveData<NetworkState>
@@ -26,9 +29,10 @@ class DetailsNetworkDataSource(private val apiService: ApiService, private val c
             compositeDisposable.add(
                 apiService.getMovieDetails(movieId)
                     .subscribeOn(Schedulers.io())
-                    .subscribe({ detailsResponseMutableLiveData.postValue(it)
-                            networkStateMutableLiveData.postValue(NetworkState.LOADED)
-                        },
+                    .subscribe({
+                        detailsResponseMutableLiveData.postValue(it)
+                        networkStateMutableLiveData.postValue(NetworkState.LOADED)
+                    },
                         {
                             networkStateMutableLiveData.postValue(
                                 NetworkState(StatusNetwork.FAILED, "Something went wrong")

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.telcelltask.R
+import com.example.telcelltask.movieapp.appconstants.DBClient.KEY
 import com.example.telcelltask.movieapp.appconstants.StatusNetwork
 import com.example.telcelltask.movieapp.base.BaseActivity
 import com.example.telcelltask.movieapp.base.BaseFragment
@@ -19,9 +20,9 @@ import com.example.telcelltask.movieapp.viewmodel.repository.MainMovieRepository
 import com.example.telcelltask.movieapp.webservice.ApiService
 import com.example.telcelltask.movieapp.webservice.NetworkState
 import com.example.telcelltask.movieapp.webservice.RetrofitClient
+import kotlinx.android.synthetic.main.details_movie_fragment.*
 import kotlinx.android.synthetic.main.main_movie_fragment.*
 
-@Suppress("UNCHECKED_CAST")
 class MainMovieFragment : BaseFragment(R.layout.main_movie_fragment) {
 
     private lateinit var viewModel: MainMovieViewModel
@@ -61,10 +62,9 @@ class MainMovieFragment : BaseFragment(R.layout.main_movie_fragment) {
             movieAdapter.submitList(it)
         })
         viewModel.networkState.observe(viewLifecycleOwner, {
-            progress_bar.visibility =
-                if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
-            error_message.visibility =
-                if (viewModel.listIsEmpty() && it.statusNetwork == StatusNetwork.FAILED) View.VISIBLE else View.GONE
+            progress_bar_popular.visibility = if (viewModel.listIsEmpty() && it == NetworkState.LOADING) View.VISIBLE else View.GONE
+            txt_error_popular.visibility = if (viewModel.listIsEmpty() && it.statusNetwork == StatusNetwork.FAILED) View.VISIBLE else View.GONE
+
             if (!viewModel.listIsEmpty()) {
                 movieAdapter.setNetworkState(it)
             }
@@ -79,7 +79,7 @@ class MainMovieFragment : BaseFragment(R.layout.main_movie_fragment) {
             override fun getSpanSize(position: Int): Int {
                 val viewType = movieAdapter.getItemViewType(position)
                 return if (viewType == movieAdapter.DATA_VIEW_TYPE) 1
-                else 3
+                else 2
             }
         }
         recycle_view_main_movie.layoutManager = gridLayoutManager
@@ -88,12 +88,8 @@ class MainMovieFragment : BaseFragment(R.layout.main_movie_fragment) {
 
         movieAdapter.addListener {
             val bundle = Bundle()
-            bundle.getInt("1", it.id)
-            openFragment(R.layout.details_movie_fragment, DetailsMovieFragment(),bundle)
-
-            /*   val intent = Intent(context, DetailsMovieFragment::class.java)
-        intent.putExtra("id", moviePoster?.id)
-        context.startActivity(intent)*/
+            bundle.putInt(KEY, it.id)
+            openFragment(R.id.fragment_container, DetailsMovieFragment(), bundle)
         }
     }
 

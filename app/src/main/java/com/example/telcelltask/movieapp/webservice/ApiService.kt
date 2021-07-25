@@ -15,4 +15,5 @@ interface ApiService {
 
     @GET(Root.GET_DETAILS)
     fun getMovieDetails(@Path(Root.PATH_VALUE) id: Int): Single<MovieDetails>
+
 }

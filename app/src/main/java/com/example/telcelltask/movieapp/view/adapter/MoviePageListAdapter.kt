@@ -7,21 +7,19 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.telcelltask.R
-import com.example.telcelltask.movieapp.appconstants.StatusNetwork
-import com.example.telcelltask.movieapp.model.MoviePoster
+import com.example.telcelltask.movieapp.model.MoviePopular
 import com.example.telcelltask.movieapp.view.adapter.viewholder.MovieItemViewHolder
 import com.example.telcelltask.movieapp.view.adapter.viewholder.NetworkStateItemViewHolder
 import com.example.telcelltask.movieapp.webservice.NetworkState
-import kotlinx.android.synthetic.main.network_state_item.view.*
 
 class MoviePageListAdapter(private val context: Context) :
-    PagedListAdapter<MoviePoster, RecyclerView.ViewHolder>(MovieDiffCallback()) {
+    PagedListAdapter<MoviePopular, RecyclerView.ViewHolder>(MovieDiffCallback()) {
 
     val DATA_VIEW_TYPE = 1
     val NETWORK_VIEW_TYPE = 2
 
     private var networkState: NetworkState? = null
-    private var onClick: ((MoviePoster) -> Unit?)? = null
+    private var onClick: ((MoviePopular) -> Unit?)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -45,7 +43,7 @@ class MoviePageListAdapter(private val context: Context) :
         }
     }
 
-    fun addListener(onClick: (data: MoviePoster) -> Unit?) {
+    fun addListener(onClick: (data: MoviePopular) -> Unit?) {
         this.onClick = onClick
     }
 
